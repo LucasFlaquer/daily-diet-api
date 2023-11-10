@@ -2,21 +2,23 @@ import fastify from 'fastify'
 import { z } from 'zod'
 import { knex } from './database'
 import crypto from 'node:crypto'
+import { hash } from 'bcryptjs'
 export const app = fastify()
 
 app.post('/register', async (req, reply) => {
-  const createUserSchema = z.object({
+  const bodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
     phone: z.string(),
     password: z.string(),
   })
-  const user = createUserSchema.parse(req.body)
+  const user = bodySchema.parse(req.body)
+  const passwordHash = await hash(user.password, 6)
   await knex('users').insert({
     id: crypto.randomUUID(),
     name: user.name,
     email: user.email,
-    password: user.password,
+    password: passwordHash,
   })
   return reply.status(201).send()
 })
