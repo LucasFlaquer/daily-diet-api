@@ -8,7 +8,6 @@ export default <Environment>{
   transformMode: 'web',
   async setup() {
     console.log('running')
-    process.env.NODE_ENV = 'e2e_test'
     const databaseName = randomUUID()
     process.env.DATABASE_URL = `./database/${databaseName}.db`
     execSync('yarn knex migrate:latest')
