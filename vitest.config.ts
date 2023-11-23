@@ -6,6 +6,5 @@ export default defineConfig({
       ['__tests__/e2e/**.spec.ts', 'database'],
       ['__tests__/unit/**', 'node'],
     ],
-    setupFiles: ['./setup.ts'],
   },
 })
