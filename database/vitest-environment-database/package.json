@@ -1,0 +1,6 @@
+{
+  "name": "vitest-environment-database",
+  "version": "1.0.0",
+  "main": "database-test-environment.ts",
+  "license": "MIT"
+}
