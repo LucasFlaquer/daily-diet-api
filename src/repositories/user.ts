@@ -1,7 +1,7 @@
 export interface CreateInput {
   name: string
   email: string
-  password_hash: string
+  passwordHash: string
   phone: string
 }
 
@@ -9,7 +9,7 @@ export interface User {
   id: string
   name: string
   email: string
-  password_hash: string
+  passwordHash: string
   phone: string
 }
 
