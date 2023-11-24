@@ -16,8 +16,7 @@ export class CreateUserUseCase {
     const user = await this.usersRepository.create({
       name: input.name,
       email: input.email,
-      phone: input.phone,
-      password_hash: passwordHash,
+      passwordHash,
     })
     return { user }
   }
