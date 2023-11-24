@@ -1,28 +1,15 @@
-import { compare, hash } from 'bcryptjs'
+import { compare } from 'bcryptjs'
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { knex } from '../../database'
 import { sign } from 'jsonwebtoken'
 import { verifyToken } from '../../middlewares/verify-token'
+import { UserController } from './controllers/UserController'
+
+const userController = new UserController()
 
 export async function Routes(app: FastifyInstance) {
-  app.post('/register', async (req, reply) => {
-    const bodySchema = z.object({
-      name: z.string(),
-      email: z.string().email(),
-      phone: z.string(),
-      password: z.string(),
-    })
-    const user = bodySchema.parse(req.body)
-    const passwordHash = await hash(user.password, 6)
-    await knex('users').insert({
-      id: crypto.randomUUID(),
-      name: user.name,
-      email: user.email,
-      password: passwordHash,
-    })
-    return reply.status(201).send()
-  })
+  app.post('/register', userController.register)
 
   app.post('/auth', async (req, reply) => {
     const bodySchema = z.object({
