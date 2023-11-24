@@ -2,7 +2,6 @@ export interface CreateInput {
   name: string
   email: string
   passwordHash: string
-  phone: string
 }
 
 export interface User {
@@ -10,9 +9,8 @@ export interface User {
   name: string
   email: string
   passwordHash: string
-  phone: string
 }
 
 export interface UsersRepository {
-  create({ name, email, password_hash, phone }: CreateInput): Promise<User>
+  create({ name, email, passwordHash }: CreateInput): Promise<void>
 }
