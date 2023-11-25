@@ -3,6 +3,7 @@ import { knex } from '../../database'
 import request from 'supertest'
 import { app } from '../../app'
 import crypto from 'node:crypto'
+import { verify } from 'jsonwebtoken'
 
 export async function createAndAuthUser() {
   const createUser = {
@@ -22,5 +23,7 @@ export async function createAndAuthUser() {
     .post('/auth')
     .send({ email: createUser.email, password: createUser.password })
   const cookies = response.headers['set-cookie']
-  return cookies
+  const token = cookies[0].split('token=')[1]
+  const { sub } = verify(token, 'SUPER_SECRET')
+  return { cookies, userId: sub as string }
 }

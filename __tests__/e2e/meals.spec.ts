@@ -11,7 +11,7 @@ describe('Meals', () => {
     await app.close()
   })
   it('should be able to add a meal to a user', async () => {
-    const cookies = await createAndAuthUser()
+    const { cookies } = await createAndAuthUser()
     const mealInput = {
       name: 'rosquinha',
       description: 'a big meal',
