@@ -10,7 +10,6 @@ export function verifyToken(
   if (token === undefined) reply.status(401).send({ message: 'Unauthorized' })
   try {
     const decoded = verify(`${token}`, 'SUPER_SECRET')
-    console.log(decoded)
     const { sub } = decoded
     if (!sub) throw new Error('Invalid Token')
     request.user = sub as string
