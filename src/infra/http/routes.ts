@@ -66,7 +66,7 @@ export async function Routes(app: FastifyInstance) {
         user_id: req.user,
         id: crypto.randomUUID(),
       })
-      reply.send({ message: 'done' })
+      reply.status(201).send()
     },
   )
 
