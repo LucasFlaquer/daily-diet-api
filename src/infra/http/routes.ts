@@ -74,7 +74,7 @@ export async function Routes(app: FastifyInstance) {
     const meals = await knex('meals')
       .select('*')
       .where('user_id', '=', `${req.user}`)
-    res.send(meals)
+    res.send({ meals })
   })
   app.get('/meals/:id', { onRequest: [verifyToken] }, async (req, reply) => {
     const paramSchema = z.object({
