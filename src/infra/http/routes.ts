@@ -96,7 +96,7 @@ export async function Routes(app: FastifyInstance) {
   app.get('/metrics', { onRequest: [verifyToken] }, async (req, reply) => {
     const meals = await knex('meals')
       .orderBy('created_at')
-      .where('id', '=', `${req.user}`)
+      .where('user_id', '=', `${req.user}`)
     let inDietMeals = 0
     let outOfDietMeals = 0
     let bestSequence = 0
